@@ -5,7 +5,6 @@ const UserPassword = document.getElementById('userpassword')
 const ConfirmPassword = document.getElementById('confirmpassword')
 const UserForm = document.getElementById('userform')
 const ClearButton = document.getElementById('clearbutton')
-let UserInfoparagraph;
 
 function onSubmit(event) {
   event.preventDefault()
@@ -18,9 +17,9 @@ function onSubmit(event) {
       ShowMessage('Email no valido','warning')
     }
 
-    /*else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(UserPassword.value)) {
+    else if (!/^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(UserPassword.value)) {
       ShowMessage('La contraseña debe tener al menos 8 caracteres, una letra mayúscula, un número y un carácter especial.', 'warning');
-    }*/
+    }
 
     else if (UserPassword.value !== ConfirmPassword.value) {
      ShowMessage('Las contraseñas no coinciden','warning')
@@ -32,11 +31,11 @@ function onSubmit(event) {
       email: UserEmail.value,
       password: UserPassword.value
     };
-/*Primero hacer get para coger los datos ya existentes del localstorage, si no hay guardara un array vacio*/
+//Primero hacer get para coger los datos ya existentes del localstorage, si no hay guardara un array vacio
     let users = JSON.parse(localStorage.getItem('users')) || [];
-/*Despues pusheamos el nuevo y se guarda en el ultimo puesto del array*/
+//Despues pusheamos el nuevo y se guarda en el ultimo puesto del array
     users.push(user);
-/*Finalmente haces set para guardar el array en el localstorage*/
+///Finalmente haces set para guardar el array en el localstorage
     localStorage.setItem('users', JSON.stringify(users));
 
    ShowMessage('Usuario creado correctamente','success', 'template/user.html')
@@ -97,18 +96,18 @@ if (ClearButton && window.location.pathname.includes('index.html'))
 
 
   if (window.location.pathname.includes('template/user.html')) {
-    // Obtener los usuarios guardados en el localStorage
+    //Obtienes los users del localstorage
     const users = JSON.parse(localStorage.getItem('users')) || [];
     
     const CardsContainer = document.getElementById('cardscontainer');
 
-    // Comprobar si el contenedor existe
+    //Si hay container.....
     if (CardsContainer) {
-      // Limpiar el contenedor en caso de que ya haya contenido
+      // Limpiar el contenedor 
       CardsContainer.innerHTML = '';
       // Iterar sobre todos los usuarios y crear tarjetas para cada uno
       users.forEach(user => {
-        // Crear el HTML de la tarjeta para el usuario
+        // Crear el HTML de la tarjeta para los users
         const cardHtml = `
           <div class="card mb-3" style="max-width: 18rem;">
             <div class="card-header">User Card</div>
@@ -118,7 +117,7 @@ if (ClearButton && window.location.pathname.includes('index.html'))
             </div>
           </div>
         `;
-        // Insertar la tarjeta en el contenedor
+        // Insertar las tarjetas en el contenedor
         CardsContainer.innerHTML += cardHtml;
       });
     }
